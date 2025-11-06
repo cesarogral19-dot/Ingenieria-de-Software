@@ -1,0 +1,25 @@
+flowchart TD
+A([Inicio]) --> B[Solicitar tipo de crepa]
+B --> C[Solicitar ingredientes extra]
+C --> D[Solicitar precio]
+D --> E{¿Desea corregir el pedido?}
+E -- Sí --> F[Volver a capturar datos del pedido]
+F --> B
+E -- No --> G[Asignar número de pedido]
+G --> H[Verificar inventario]
+H -->|Ingredientes insuficientes| I[Mostrar error y cancelar pedido]
+I --> Z([Fin])
+H -->|Ingredientes suficientes| J[Preparación del pedido]
+J --> K[[Ciclo: Preparar pedido]]
+K --> L{¿Ciclo completado?}
+L -- No --> K
+L -- Sí --> M[Pedido listo]
+M --> N[Solicitar forma de pago]
+N --> O{¿Pago válido?}
+O -- No --> P[Registrar pago como efectivo]
+P --> Q[Registrar venta]
+O -- Sí --> Q[Registrar venta]
+Q --> R[Descontar ingredientes del inventario]
+R --> S[Actualizar estado del pedido a entregado]
+S --> T[Generar registro de actividad del usuario]
+T --> Z([Fin])
